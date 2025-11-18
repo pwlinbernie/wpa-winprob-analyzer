@@ -3,8 +3,6 @@
 # WBC2013                                                                      #
 #------------------------------------------------------------------------------#
 rm( list=ls() )
-setwd( "C:\\Users\\user\\Desktop\\久留米\\powei" )
-
 
 send.table.to.excel <- function( tab, filename=paste(tempfile(),".csv",sep="") ){
   write.csv(tab, filename )
@@ -14,7 +12,7 @@ send.table.to.excel <- function( tab, filename=paste(tempfile(),".csv",sep="") )
 #------------------------------------------------------------------------------#
 # 状況別得点別確率                                                             #
 #------------------------------------------------------------------------------#
-( datRP <- read.csv( "rpiunprob_albert.csv" ) )   # albert tab7-4
+( datRP <- read.csv( "data/rpiunprob_albert.csv" ) )   # albert tab7-4
 n <- nrow(datRP)
 datRP[,"run0"]
 p0 <- t( sapply( 1:n, function(i) dpois( 3:10, lambda=datRP[i,"runs"] ) ) )
@@ -29,7 +27,7 @@ apply( rp,  1, function(x) points(0:10, x, type="b" ) )
 #--------------------------------------#
 # 勝利確率：点差ｘイニング終了時       #
 #--------------------------------------#
-(tmp <- read.csv( "winprob_by_inning_and_rundifferential.csv" ))
+(tmp <- read.csv( "data/winprob_by_inning_and_rundifferential.csv" ))
 ( wp_ird <- tmp[ tmp$method=="Albert", ] )
 ( wp_H2 <- tmp[ tmp$method=="home", -1] )
 ( wp_V1 <- tmp[ tmp$method=="visitor",-1 ] )
@@ -121,7 +119,7 @@ get_WP( inn=3, out=2, base=13, rd0=2, half=1 ) -
 # WBC
 ###############################################################################
 #-----------------------------------------------------#
-dat7 <- read.csv( "WBC2013 CT vs JP.csv" )
+dat7  <- read.csv("data/WBC2013_CT_vs_JP.csv")
 dat7
 
 get.gamepdat <- function(dat7){     
